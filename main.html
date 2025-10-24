@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Gadget Hub | Discover Perplexity.ai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-color: #0d0f1a;
+      --text-color: #fff;
+      --card-bg: rgba(255,255,255,0.05);
+      --accent: #7f6bff;
+    }
+    body.light {
+      --bg-color: #f9f9ff;
+      --text-color: #111;
+      --card-bg: #fff;
+      --accent: #6a5af9;
+    }
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: all 0.4s ease;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    canvas#particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
+
+    header {
+      text-align: center;
+      padding: 25px 20px;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .toggle-theme {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      border-radius: 30px;
+      padding: 8px 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    .toggle-theme:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(127,107,255,0.3);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 35px;
+      opacity: 0.85;
+    }
+    .cta-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 15px 35px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(127,107,255,.4);
+    }
+
+    section {
+      background: var(--card-bg);
+      margin: 60px auto;
+      border-radius: 18px;
+      max-width: 1100px;
+      padding: 40px 30px;
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 1.9rem;
+      margin-bottom: 25px;
+    }
+
+    .about p {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    .feature {
+      text-align: center;
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 25px 20px;
+      transition: all 0.3s ease;
+    }
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(127,107,255,0.2);
+    }
+    .feature img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 5px rgba(127,107,255,0.5));
+    }
+    .feature h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .feature p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    .testimonial {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .testimonial:hover {transform: translateY(-5px);}
+    .testimonial img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin-bottom: 12px;
+      border: 2px solid var(--accent);
+    }
+    .testimonial h4 {font-size: 1rem; margin-bottom: 6px;}
+    .testimonial p {font-size: 0.9rem; opacity: 0.85;}
+
+    .cta-final {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .cta-final h3 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    @media (max-width:600px) {
+      .hero h1 {font-size: 2rem;}
+      section {margin: 40px 15px; padding: 30px 20px;}
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <header>
+    <div>AI Gadget Hub</div>
+    <button class="toggle-theme" id="themeToggle">Light Mode</button>
+  </header>
+
+  <section class="hero">
+    <h1>Unlock the Future of Knowledge with Perplexity.ai</h1>
+    <p>Experience the next evolution of AI-powered research and discovery. Get verified, intelligent answers faster than ever.</p>
+    <a href="https://pplx.ai/whitez72403670" class="cta-btn" target="_blank">Try Perplexity.ai Now</a>
+  </section>
+
+  <section class="about">
+    <h2>About Perplexity.ai</h2>
+    <p>Perplexity.ai is your AI-powered search companion — it merges cutting-edge language models with real-time web data to provide precise, cited, and human-like answers. Whether you’re a student, creator, or entrepreneur, it’s your intelligent co-pilot for learning and innovation.</p>
+  </section>
+
+  <section class="features-section">
+    <h2>Features</h2>
+    <div class="features">
+      <div class="feature">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712101.png" alt="AI Answers">
+        <h3>Real-time AI Answers</h3>
+        <p>Get instant insights powered by live AI reasoning and web knowledge.</p>
+      </div>
+      <div class="feature">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712108.png" alt="Verified Sources">
+        <h3>Verified Sources</h3>
+        <p>Every answer comes backed by credible, verifiable references.</p>
+      </div>
+      <div class="feature">
+        <img src="https://cdn-icons-png.flaticon.com/512/2889/2889676.png" alt="Smart Interface">
+        <h3>Smart, Minimal Interface</h3>
+        <p>A clean distraction-free layout designed for focused research.</p>
+      </div>
+      <div class="feature">
+        <img src="https://cdn-icons-png.flaticon.com/512/4341/4341139.png" alt="Personalized AI">
+        <h3>Personalized AI</h3>
+        <p>Train and tailor responses based on your workflow and preferences.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-section">
+    <h2>Testimonials / Use Cases</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Creator">
+        <h4>Sarah K. – Content Creator</h4>
+        <p>“Perplexity.ai saves me hours when researching topics — I get trusted data instantly.”</p>
+      </div>
+      <div class="testimonial">
+        <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="Student">
+        <h4>David M. – Student</h4>
+        <p>“I rely on it for my thesis research — it gives deeper insights with verified sources.”</p>
+      </div>
+      <div class="testimonial">
+        <img src="https://randomuser.me/api/portraits/women/40.jpg" alt="Entrepreneur">
+        <h4>Emily R. – Entrepreneur</h4>
+        <p>“Perfect for market analysis and trend insights — it’s my daily AI assistant.”</p>
+      </div>
+    </div>
+    <div class="cta-final">
+      <h3>Join Thousands of Smart Thinkers Using Perplexity.ai Today!</h3>
+      <a href="https://pplx.ai/whitez72403670" class="cta-btn" target="_blank">Start Exploring →</a>
+    </div>
+  </section>
+
+  <footer>© 2025 AI Gadget Hub | Empowering Knowledge with Perplexity.ai</footer>
+
+  <script>
+    // Particle animation
+    const canvas=document.getElementById('particles');
+    const ctx=canvas.getContext('2d');
+    let w,h,particlesArray=[];
+    function init(){
+      w=canvas.width=window.innerWidth;
+      h=canvas.height=window.innerHeight;
+      particlesArray=[];
+      const num=w*h/15000;
+      for(let i=0;i<num;i++){
+        particlesArray.push({
+          x:Math.random()*w,
+          y:Math.random()*h,
+          r:Math.random()*2+1,
+          dx:(Math.random()-.5)*.6,
+          dy:(Math.random()-.5)*.6
+        });
+      }
+    }
+    function animate(){
+      ctx.clearRect(0,0,w,h);
+      for(const p of particlesArray){
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle='rgba(127,107,255,0.8)';
+        ctx.fill();
+        p.x+=p.dx; p.y+=p.dy;
+        if(p.x<0||p.x>w)p.dx*=-1;
+        if(p.y<0||p.y>h)p.dy*=-1;
+      }
+      requestAnimationFrame(animate);
+    }
+    window.addEventListener('resize',init);
+    init(); animate();
+
+    // Theme Toggle
+    const toggle=document.getElementById('themeToggle');
+    toggle.addEventListener('click',()=>{
+      document.body.classList.toggle('light');
+      toggle.textContent=document.body.classList.contains('light')?"Dark Mode":"Light Mode";
+    });
+  </script>
+</body>
+</html>
